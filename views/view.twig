@@ -1,0 +1,47 @@
+{% spaceless %}
+{% import 'macro.twig' as m %}
+<!DOCTYPE html>
+<!--
+                        .               .ooooo.                               .
+      8o.             .o8              o88                                  .o8
+ .oooo888"  .ooooo. .o888oo  .ooooo.   888oooo.      ooo. .oo.    .ooooo. .o888oo
+d88' `888  d88' `88b  888   d8Y' `88b  888' `88b     `888P"Y88b  d88' `88b  888
+888   888  8888888P"  888    .oooo888  888   888      888   888  8888888P"  888
+888   888  888        888 . 888   888  888   888 .o.  888   888  888        888 .
+'Y8bod888  `Y8bod8P"  "888" `V88V"V8P' `Y8bod8P' Y8P d888o o888b `Y8bod8P"  "888"
+     `888
+`Y8bod8P'
+
+-->
+<html lang='ja'>
+
+<head>
+  <title>{{ param.title|default('Parcel') }}</title>
+  <meta charset='utf-8'>
+  {{ m.imports('styles', debug) }}
+</head>
+
+<body>
+  <header id='ini'>
+    <div class='limit'>
+      <h1><a href='/'>$&#123;{{ param.header|default('parcel') }}&#125;</a></h1>
+      {{ m.navigation(navis|default()) }}
+    </div>
+  </header>
+  <div id='sub'>
+    {% block content %}
+      {% include 'pjax.twig' %}
+    {% endblock %}
+  </div>
+  <footer id='end'>
+    <p>{{ param.footer|default('Powerd by Silex. Application Parcel by geta6.') }}<br>&copy; {{ 'now'|date('Y') }} {{ param.author }}</p>
+  </footer>
+  {{ m.imports('scripts') }}
+  {{ m.scriptload('/lib/Parcel.js') }}
+  {{ m.scriptload('/lib/common.js') }}
+  {% block scripts %}
+  {% endblock %}
+</body>
+
+</html>
+{% endspaceless %}

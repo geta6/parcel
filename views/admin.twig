@@ -1,0 +1,62 @@
+{% extends 'view.twig' %}
+
+{% block content %}
+  <div class='prefs'>
+    <h1>Password</h1>
+    <ul>
+      <li>
+        <input type='text' class='input key' value='username' readonly>
+        <input type='text' id='paswdusr' class='input val' value='{{ paswd.user }}'>
+      </li>
+      <li>
+        <input type='text' class='input key' value='password' readonly>
+        <input type='text' id='paswdpwd' class='input val' value=''>
+      </li>
+      <li><input type='button' class='button' value='change user/pass' id='paswdsubmit'></li>
+    </ul>
+  </div>
+  <div id='param' class='prefs'>
+    <h1>Parameter Configuration (to delete, send blank key)</h1>
+    <ul>
+      {% for key, val in param %}
+        <li class='param'>
+          <input type='text' class='input key' value='{{ key }}'>
+          <input type='text' class='input val' value='{{ val }}'>
+        </li>
+      {% endfor %}
+      <li class='param'>
+        <input type='text' class='input key' value=''>
+        <input type='text' class='input val' value=''>
+      </li>
+      <li><input type='button' class='button' value='regist params' id='paramsubmit'></li>
+    </ul>
+  </div>
+  <div id='pages' class='prefs'>
+    <h1>New Page (syntax is markdown)</h1>
+    <ul>
+      <li><input type='text' id='pagekey' class='input head'></li>
+      <li><textarea id='pageval' class='input body'></textarea></li>
+      <li><input type='button' class='button' value='add page' id='pagesubmit'></li>
+    </ul>
+  </div>
+  <div id='pedit' class='prefs'>
+    <h1>Edit Published Page (to delete, select and send blank)</h1>
+    <select id='editselect'>
+      <option value='NaN' selected>--</option>
+      {% for val in pages|default() %}
+        <option value='{{ val.uid }}'>{{ val.uid }} : {{ val.key }}</option>
+      {% endfor %}
+    </select>
+    <input type='hidden' id='edituid'>
+    <input type='hidden' id='editday'>
+    <ul>
+      <li><input type='text' id='editkey' class='input head'></li>
+      <li><textarea id='editval' class='input body'></textarea></li>
+      <li><input type='button' class='button' value='pub edition' id='editsubmit' disabled></li>
+    </ul>
+  </div>
+{% endblock %}
+
+{% block scripts %}
+  {{ m.scriptload('/lib/admin.js') }}
+{% endblock %}

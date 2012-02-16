@@ -1,0 +1,9 @@
+{% import 'macro.twig' as m %}
+
+{% if pages %}
+  {% for page in pages %}
+    {{ m.article(page, param.author) }}
+  {% endfor %}
+{% else %}
+  {{ m.article() }}
+{% endif %}

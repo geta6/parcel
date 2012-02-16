@@ -1,0 +1,8 @@
+#!/usr/bin/env php
+<?php
+echo "Initialize Database...";
+$pdo = new PDO('sqlite:'.__DIR__.'/data.db');
+$pdo->query('CREATE TABLE paswd (key TEXT UNIQUE, val TEXT)');
+$pdo->query('CREATE TABLE param (key TEXT UNIQUE, val TEXT)');
+$pdo->query('CREATE TABLE pages (uid INTEGER PRIMARY KEY, key TEXT, val TEXT, day INTEGER)');
+echo "Done.\n";

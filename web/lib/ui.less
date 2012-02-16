@@ -1,0 +1,269 @@
+@Base0 : #222;
+@Base1 : #333;
+@Base2 : #444;
+@Base00 : #CCC;
+@Base01 : #DDD;
+@Base02 : #EEE;
+@ColorY : #B58900;
+@ColorO : #CB4B16;
+@ColorR : #DC322F;
+@ColorM : #D33682;
+@ColorV : #6C71C4;
+@ColorB : #268BD2;
+@ColorC : #2AA198;
+@ColorG : #859900;
+
+@Grid : 12px;
+@SplitWidth : 80%;
+
+.limit {
+  margin: 0 auto;
+  width: @Grid*50;
+}
+
+.hoverast {
+  &:hover {
+    &:before {
+      display: inline;
+      content: '* ';
+      color: @Base00;
+    }
+  }
+}
+
+* {
+  position: relative;
+  z-index: inherit;
+}
+
+body {
+  position: relative;
+  z-index: 10;
+  padding-bottom: 1.6em;
+  font: 400 @Grid 'Open Sans',Sans-Serif;
+  line-height: 1.5;
+  color: @Base0;
+}
+
+a {
+  color: @Base2;
+  text-decoration: underline;
+  &:hover {
+    color: @Base00;
+    text-decoration: none;
+  }
+}
+
+b {
+  font-weight : 400;
+  color: @ColorM;
+}
+
+i {
+  color: @ColorB;
+}
+
+code {
+  display: inline-block;
+  padding: 0 @Grid;
+  font: .9em 'Ubuntu Mono', monospace;
+  border: 1px solid @Base01;
+  background: @Base02;
+  color: @Base2;
+}
+
+pre {
+  padding: @Grid 0;
+  width: @SplitWidth;
+  border: 1px solid @Base01;
+  background: @Base02;
+  color: @Base2;
+  code {
+    border: none;
+  }
+}
+
+#ini {
+  margin-bottom: @Grid*2;
+  height: @Grid*6;
+  line-height: @Grid*6;
+  border-bottom: @Grid/2 solid @Base01;
+  background-color: @Base1;
+  color: @Base01;
+  h1 {
+    font-size: 1.2em;
+    font-family: 'Ubuntu Mono';
+    float: left;
+    a {
+      color: inherit;
+      text-decoration: none;
+      &:hover {
+        color: @Base2;
+      }
+    }
+  }
+  nav {
+    float: right;
+    li {
+      display: inline-block;
+      padding-left: 1em;
+      a {
+        color: inherit;
+      }
+    }
+  }
+}
+
+#sub {
+  .limit;
+  margin-bottom: @Grid*4;
+  article {
+    padding-bottom: @Grid*4;
+    &>* {
+      margin-left: .6em;
+    }
+    &>h1 {
+      margin-bottom: .6em;
+      width: @SplitWidth;
+      border-bottom: 3px double @Base01;
+    }
+    &>h2 {
+      margin-bottom: .6em;
+      width: @SplitWidth;
+      border-bottom: 1px dashed @Base01;
+    }
+    ul {
+      margin-bottom: .6em;
+      li {
+        list-style: disc inside;
+        margin-left: .5em;
+      }
+    }
+    header {
+      margin-left: 0;
+      &>* {
+        padding-left: 0.2em;
+      }
+      h1 {
+        border-bottom: 1px solid @Base00;
+        a {
+          font: inherit;
+          color: inherit;
+          text-decoration: none;
+          .hoverast;
+        }
+      }
+      p {
+        text-align: right;
+        font-size: 0.8em;
+      }
+    }
+    footer {
+      margin: 1.25em 0 0 0;
+      padding-top: .2em;
+      border-top: 1px solid @Base02;
+      font-size: 0.8em;
+      color: @Base2;
+      &>* {
+        font-style: italic;
+        padding-left: 0.16em;
+      }
+    }
+  }
+}
+
+#end {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: .5em 0;
+  opacity: .8;
+  color: @Base2;
+  font-size: .8em;
+  border-top: 1px solid @Base01;
+  background: @Base02;
+  p {
+    .limit;
+  }
+}
+
+.prefs {
+  margin: 2em 0;
+  h1 {
+    width: @Grid*40;
+    border-bottom: 1px dashed @Base02;
+  }
+  li {
+    margin-left: .5em;
+  }
+}
+
+.button {
+  display: inline-block;
+  padding: .5em;
+  border: 1px solid @Base01;
+  font-family: 'Ubuntu Mono';
+  background: @ColorB;
+  cursor: pointer;
+  &:hover {
+    background: @ColorV;
+  }
+}
+
+.input {
+  display: inline-block;
+  margin: .5em 0;
+  padding: .5em 0;
+  border: 1px solid @Base01;
+  font-family: 'Ubuntu Mono';
+  &.key {
+    padding-left: .5em;
+    border-right: 1px solid @Base02;
+    width: @Grid*15;
+  }
+  &.val {
+    padding-left: .5em;
+    border-left: none;
+    width: @Grid*20;
+  }
+  &.head {
+    margin-bottom: 0;
+    padding: .5em;
+    width: @Grid*35;
+  }
+  &.body {
+    margin-top: 0;
+    padding: .5em;
+    height: @Grid*5;
+    border-top: none;
+    width: @Grid*35;
+  }
+}
+
+#hud {
+  display : none;
+  position : fixed;
+  top : 50%;
+  left : 50%;
+  margin : -90px 0 0 -105px;
+  width: 210px;
+  height: 180px;
+  background : url(/media/load.base.png);
+  img {
+    display: block;
+    margin: 5em auto 2em auto;
+  }
+  h1 {
+    color: white;
+    font-size: 16px;
+    text-align: center;
+  }
+}
+
+.cloud {
+  position: fixed;
+  z-index: 0;
+  width: 320px;
+  height: 150px;
+}

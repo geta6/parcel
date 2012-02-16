@@ -1,0 +1,54 @@
+{% macro styleload(href, rel, type) %}
+  <link rel='{{ rel|default('stylesheet') }}' type='{{ type|default('text/css') }}' href='{{ href }}'>
+{% endmacro %}
+
+
+{% macro scriptload(src, type) %}
+  <script type='{{ type|default('text/javascript') }}' src='{{ src }}'></script>
+{% endmacro %}
+
+
+{% macro imports(switch, debug) %}
+  {% if switch == 'styles' %}
+    {{ _self.styleload('http://www.geta6.net/yui-reset-3.4.1.min.css') }}
+    {{ _self.styleload('http://fonts.googleapis.com/css?family=Ubuntu+Mono|Open+Sans') }}
+    {% if debug|default(false) %}
+      {{ _self.styleload('/lib/ui.less', 'stylesheet/less') }}
+      {{ _self.scriptload('http://www.geta6.net/less-1.2.1.min.js') }}
+      {# _self.scriptload('http://www.geta6.net/less-1.2.1.min.custom.js') #}
+    {% else %}
+      {{ _self.styleload('/lib/ui.css') }}
+    {% endif %}
+    <!--[if lt IE 9]>
+      {{ _self.scriptload('http://html5shiv.googlecode.com/svn/trunk/html5.js') }}
+    <![endif]-->
+  {% elseif switch == 'scripts' %}
+    {{ _self.scriptload('http://www.geta6.net/jquery-1.7.1.min.js') }}
+    {{ _self.scriptload('http://www.geta6.net/jquery-pjax.js') }}
+  {% endif %}
+{% endmacro %}
+
+
+{% macro navigation(lists) %}
+  <nav>
+    <ul>
+      {% for list in lists %}
+        <li><a href='{{ list[0].uid|default('#') }}'>{{ list[0].key }}</a></li>
+      {% endfor %}
+    </ul>
+  </nav>
+{% endmacro %}
+
+
+{% macro article(page, author) %}
+  <article>
+    <header>
+      <h1><a href='/{{ page.uid|default('') }}'>{{ page.key|default('Document Not Found') }}</a></h1>
+      <p>{{ page.day|default('now')|date('Y.m.d') }} #{{ page.uid|default(404) }}</p>
+    </header>
+    {{ page.val|default('<p>Sorry, document not found on this server...</p>')|raw }}
+    <footer>
+      <p>{{ page.day|default('now')|date('H:i:s') }} by {{ author|default('anonymous') }}.</p>
+    </footer>
+  </article>
+{% endmacro %}
