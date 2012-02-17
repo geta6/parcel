@@ -34,7 +34,10 @@ d88' `888  d88' `88b  888   d8Y' `88b  888' `88b     `888P"Y88b  d88' `88b  888
     {% endblock %}
   </div>
   <footer id='end'>
-    <p>{{ param.footer|default('Powerd by Silex. Application Parcel by geta6.') }}<br>&copy; {{ 'now'|date('Y') }} {{ param.author }}</p>
+    <p>
+      {{ param.footer|default('Powerd by Silex. Application Parcel by geta6.') }}<br>
+      &copy; {{ 'now'|date('Y') }} {{ param.author|default('anonymous') }} <a href='/admin'>admin</a>
+    </p>
   </footer>
   {{ m.imports('scripts') }}
   {{ m.scriptload('/lib/Parcel.js') }}
