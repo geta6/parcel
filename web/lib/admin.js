@@ -1,5 +1,7 @@
 $(function () {
 
+  parcel.spinload();
+
   $(window).bind('parcelajax', function (e, response) {
     if ('pedit' == response.req.act) {
       $('#edituid').val(response.res.uid);

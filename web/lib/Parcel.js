@@ -39,7 +39,22 @@ function Parcel() {
     }
   }
 
-  self.hud = $('<div>').attr({'id':'hud'}).append($('<img>').attr({src:'/media/load.spin.gif'})).append($('<h1>'));
+  self.spinintv = null;
+  self.spinload = function () {
+    var spin = $('#spin');
+    spin.css({width:'42px',height:'42px',backgroundImage:'url(/media/load.spin.png)'});
+    var spintime = 0;
+    self.spinintv = setInterval(function(){
+      spin.css({backgroundPosition:'0 '+-1*spintime*42+'px'});
+      spintime++;
+      if (12==spintime) spintime = 0;
+    }, 50);
+  }
+  self.spinunload = function () {
+    clearInterval(self.spinintv);
+  }
+
+  self.hud = $('<div>').attr({'id':'hud'}).append($('<div>').attr({id:'spin'})).append($('<h1>'));
   self.message = {
     show : function (msg, time) {
       time = self.isset(time, 480);
@@ -51,17 +66,21 @@ function Parcel() {
           $(this).html(msg).fadeIn(60);
         });
       }
+      self.spinload();
     },
     hide : function (time) {
       time = self.isset(time, 480);
       $('#hud').fadeOut(time, function () {
+        self.spinunload();
         $(this).remove();
       });
     },
     push : function (msg, time) {
       time = self.isset(time, 1000);
       self.message.show(msg);
-      setTimeout(function() { self.message.hide() }, time);
+      setTimeout(function() {
+        self.message.hide();
+      }, time);
     }
   }
 }
